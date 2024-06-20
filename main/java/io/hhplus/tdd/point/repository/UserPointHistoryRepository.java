@@ -6,6 +6,6 @@ import io.hhplus.tdd.point.dto.PointHistory;
 import java.util.List;
 
 public interface UserPointHistoryRepository {
-    public List<PointHistory> getUserPointHistory(Long id);
-    public PointHistory insertPointHistory(long id, long amount, TransactionType type, long updateMillis);
+    public List<PointHistory> getUserPointHistories(Long id);
+    public PointHistory insert(long id, long amount, TransactionType type, long updateMillis);
 }
