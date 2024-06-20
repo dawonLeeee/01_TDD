@@ -26,9 +26,14 @@ public class UserPointTable {
 
     public UserPoint insertOrUpdate(long id, long amount) {
         throttle(300);
-        UserPoint userPoint = new UserPoint(id, amount, System.currentTimeMillis());
-        table.put(id, userPoint);
-        return userPoint;
+        UserPoint userPoint = table.get(id);
+//        if(userPoint == null) {
+//            return new UserPoint(id, amount, System.currentTimeMillis());
+//        } else {
+            userPoint = new UserPoint(id, amount, System.currentTimeMillis());
+            table.put(id, userPoint);
+            return userPoint;
+//        }
     }
 
     private void throttle(long millis) {

@@ -4,6 +4,8 @@ import io.hhplus.tdd.point.dto.UserPoint;
 
 public interface UserPointRepository {
 
-    UserPoint selectById(long id);
-    UserPoint insertUserPoint(long id, long point, long updateMillis);
+    UserPoint selectById(long userId);
+    UserPoint insertOrUpdate(long userId, long point);
+
+    long getTotalUsers();
 }

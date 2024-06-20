@@ -19,8 +19,17 @@ public class PointController {
 
     private static final Logger log = LoggerFactory.getLogger(PointController.class);
 
+    private final PointService pointService;
+
     @Autowired
-    private final PointService pointService = new PointService();
+    public PointController(PointService pointService) {
+        this.pointService = pointService;
+    }
+
+    @PostMapping("/register")
+    public UserPoint registerUser(@RequestBody UserPoint userPoint) {
+        return pointService.registerUser(userPoint.id(), userPoint.point());
+    }
 
     @GetMapping("{id}")
     public UserPoint getPoint(@PathVariable long id) {
@@ -28,12 +37,12 @@ public class PointController {
     }
 
     @GetMapping("{id}/histories")
-    public List<PointHistory> getPointHistories(@PathVariable long id) {
+    public List<PointHistory> histories(@PathVariable long id) {
         return pointService.getPointHistories(id);
     }
 
     @PatchMapping("{id}/charge")
-    public UserPoint charge(@PathVariable long id,@RequestBody long amount) {
+    public UserPoint charge(@PathVariable long id,@RequestBody long amount) throws IllegalArgumentException{
         return pointService.chargePoint(id, amount);
     }
 
